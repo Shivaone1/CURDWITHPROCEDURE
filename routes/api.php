@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\testController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,11 @@ Route::POST('index', [TestController::class, 'index']);
 Route::POST('create', [TestController::class, 'store']);
 Route::POST('edit/{id}', [TestController::class, 'update']);
 Route::POST('delete/{id}', [TestController::class, 'destroy']);
+Route::apiResource('tasks', 'App\Http\Controllers\TaskController');
+
+Route::group(['prefix' => 'tasks'], function () {
+    Route::post('/index', [TaskController::class, 'index']);
+    Route::post('/create', [TaskController::class, 'store']);
+    Route::post('/edit/{id}', [TaskController::class, 'update']);
+    Route::post('/delete/{id}', [TaskController::class, 'destroy']);
+});

@@ -83,3 +83,42 @@ class testController extends Controller
         }
     }
 }
+
+
+// DELIMITER $$
+// CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateRecord`(IN name VARCHAR(255), IN email VARCHAR(255), IN mobile VARCHAR(255), IN city VARCHAR(255), IN pinCode VARCHAR(255), IN salary DECIMAL(10, 2), IN company VARCHAR(255))
+// BEGIN
+//     DECLARE last_insert_id INT;
+
+//     INSERT INTO tests (name, email, mobile, city, pinCode) VALUES (name, email, mobile, city, pinCode);
+    
+//     SET last_insert_id = LAST_INSERT_ID();
+
+//     INSERT INTO test2s (test_id, salary, company) VALUES (last_insert_id, salary, company);
+// END$$
+// DELIMITER ;
+
+// DELIMITER $$
+// CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteRecord`(IN recordId INT)
+// BEGIN
+//     DELETE FROM test2s WHERE test_id = recordId;
+//     DELETE FROM tests WHERE id = recordId;
+// END$$
+// DELIMITER ;
+
+// DELIMITER $$
+// CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllRecords`()
+// BEGIN
+//     SELECT name,email,city,salary,company
+//     FROM tests
+//     JOIN test2s ON tests.id =test2s.test_id;
+// END$$
+// DELIMITER ;
+
+// DELIMITER $$
+// CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateRecord`(IN `update_id` INT, IN `name` VARCHAR(255), IN `email` VARCHAR(255), IN `mobile` VARCHAR(255), IN `city` VARCHAR(255), IN `pinCode` VARCHAR(255), IN `salary` VARCHAR(255), IN `company` VARCHAR(255))
+// BEGIN
+//     UPDATE tests SET name = name, email = email,mobile=mobile,city=city,pinCode=pinCode WHERE id = update_id;
+//     UPDATE test2s SET salary = salary,company=company WHERE test_id = update_id;
+// END$$
+// DELIMITER ;
