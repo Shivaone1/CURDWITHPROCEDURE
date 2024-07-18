@@ -7,16 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Task;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use App\Models\Task;
 use App\Mail\TaskCreated;
 
 class SendTaskCreatedEmail implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable,InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $task;
-    
+    public $task;
+
     public function __construct(Task $task)
     {
         $this->task = $task;
@@ -24,9 +25,8 @@ class SendTaskCreatedEmail implements ShouldQueue
 
     public function handle()
     {
-
-        if ($this->task->user && $this->task->user->email) {
-            Mail::to($this->task->user->email)->send(new TaskCreated($this->task));
-        }
+        $recipientEmail = $this->task->email; 
+        // Log::info('Sending email to: ' . $recipientEmail);
+        Mail::to($recipientEmail)->send(new TaskCreated($this->task));
     }
 }

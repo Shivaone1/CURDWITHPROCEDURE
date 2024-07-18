@@ -4,22 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Que mail test</title>
+    <title>Email Sending Using SMTP JOBS & Queue.</title>
 </head>
 
 <body>
-    @component('mail::message')
-    # Task Created
-
-    A new task has been created.
-
-    **Task Name:** {{ $taskName }}
-
-    **Description:** {{ $taskDescription }}
-
-    Thanks,<br>
-    {{ config('app.name') }}
-    @endcomponent
+    <h1>Welcome Email</h1>
+    <br>
+    <p>Thanks for your task submission:</p>
+    <p><strong>Title:</strong> {{ $task->title }}</p>
+    <p><strong>Description:</strong> {{ $task->description }}</p>
+    <p><strong>Email:</strong> {{ $task->email }}</p>
 </body>
 
 </html>

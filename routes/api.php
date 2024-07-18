@@ -24,6 +24,7 @@ Route::POST('index', [TestController::class, 'index']);
 Route::POST('create', [TestController::class, 'store']);
 Route::POST('edit/{id}', [TestController::class, 'update']);
 Route::POST('delete/{id}', [TestController::class, 'destroy']);
+
 Route::apiResource('tasks', 'App\Http\Controllers\TaskController');
 
 Route::group(['prefix' => 'tasks'], function () {

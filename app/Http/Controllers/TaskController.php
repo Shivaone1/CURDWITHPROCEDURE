@@ -19,10 +19,11 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'email'=>'required',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
-
+        
         $task = Task::create($request->all());
         // Dispatch job to send email
         SendTaskCreatedEmail::dispatch($task);

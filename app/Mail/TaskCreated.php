@@ -7,46 +7,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Task;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
-class TaskCreated extends Mailable implements ShouldQueue
+class TaskCreated extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels,Dispatchable;
 
     public $task;
 
-    /**
-     * Create a new message instance.
-     *
-     * @param Task $task
-     * @return void
-     */
     public function __construct(Task $task)
     {
         $this->task = $task;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
-        return $this->subject('Test Queue Jobs Created')
-                    ->view('emails.tasks.created')
-                    ->with([
-                        'title' => $this->task->title,
-                        'description' => $this->task->description,
-                    ]);
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
+        return $this->subject('Task Send Email')
+            ->view('emails.tasks.created')
+            ->with(['task' => $this->task]);
     }
 }
